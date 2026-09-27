@@ -50,19 +50,19 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyAntC8zr36il9w516BcDclKrkmlTynF_1Y',
-    appId: '1:1064854756293:android:c0a57c0000000001',
+    apiKey: 'AIzaSyDOw8fwtkoInQoR7uSCRh3c-MtxwktPXs4',
+    appId: '1:1064854756293:android:ee8cc22cbec9b5ad5dc9ac',
     messagingSenderId: '1064854756293',
     projectId: 'trvna-f36e0',
     storageBucket: 'trvna-f36e0.firebasestorage.app',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyAntC8zr36il9w516BcDclKrkmlTynF_1Y',
-    appId: '1:1064854756293:ios:c0a57c0000000002',
+    apiKey: 'AIzaSyBLTUaMLXgUBXsPcx6oPUsCidQk1Sfs1Dg',
+    appId: '1:1064854756293:ios:d8cc32b1c0833aa15dc9ac',
     messagingSenderId: '1064854756293',
     projectId: 'trvna-f36e0',
     storageBucket: 'trvna-f36e0.firebasestorage.app',
-    iosBundleId: 'com.trvna.customer',
+    iosBundleId: 'nl.trvna.customer',
   );
 }

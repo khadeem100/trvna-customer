@@ -14,7 +14,7 @@
     <string>manual</string>
     <key>provisioningProfiles</key>
     <dict>
-        <key>com.trvna.customer</key>
+        <key>nl.trvna.customer</key>
         <string>TRVNA Customer AppStore</string>
     </dict>
 </dict>
