@@ -26,8 +26,8 @@ extension AppColors on ColorScheme {
   Color get lightGreyColor => const Color(0xff8B8B8B);
 
   //splashScreen GradientColor
-  static Color splashScreenGradientTopColor = const Color(0xff2050D2);
-  static Color splashScreenGradientBottomColor = const Color(0xff143386);
+  static Color splashScreenGradientTopColor = const Color(0xffF6F4F1);
+  static Color splashScreenGradientBottomColor = const Color(0xffF6F4F1);
 
   Color get primaryColor =>
       brightness == Brightness.light ? lightPrimaryColor : darkPrimaryColor;

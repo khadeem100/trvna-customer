@@ -147,8 +147,8 @@ class _SplashScreenState extends State<SplashScreen> {
         value: SystemUiOverlayStyle(
             statusBarColor: AppColors.splashScreenGradientTopColor,
             systemNavigationBarColor: AppColors.splashScreenGradientBottomColor,
-            statusBarIconBrightness: Brightness.light,
-            systemNavigationBarIconBrightness: Brightness.light),
+            statusBarIconBrightness: Brightness.dark,
+            systemNavigationBarIconBrightness: Brightness.dark),
         child: Scaffold(
           body: BlocConsumer<SystemSettingCubit, SystemSettingState>(
             listener: (final BuildContext context,
@@ -271,25 +271,18 @@ class _SplashScreenState extends State<SplashScreen> {
                       },
                       child: Stack(
                         children: [
-                          CustomContainer(
-                            gradient: LinearGradient(
-                              colors: [
-                                AppColors.splashScreenGradientTopColor,
-                                AppColors.splashScreenGradientBottomColor,
-                              ],
-                              stops: [0, 1],
-                              begin: Alignment.topCenter,
-                              end: Alignment.bottomCenter,
-                            ),
-                            width: context.screenWidth,
-                            height: context.screenHeight,
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 15, vertical: 10),
-                            child: const Center(
-                              child: CustomSvgPicture(
-                                  svgImage: AppAssets.splashLogo,
-                                  height: 240,
-                                  width: 220),
+                          ColoredBox(
+                            color: AppColors.splashScreenGradientTopColor,
+                            child: ClipRect(
+                              child: SizedBox(
+                                width: context.screenWidth,
+                                height: context.screenHeight,
+                                child: Image.asset(
+                                  AppAssets.splashLogo,
+                                  fit: BoxFit.fitHeight,
+                                  alignment: Alignment.centerLeft,
+                                ),
+                              ),
                             ),
                           ),
                           if (showCompanyLogoOnSplash)

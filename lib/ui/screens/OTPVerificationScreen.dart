@@ -334,11 +334,15 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
       );
 
   Widget _buildLogoWidget() {
-    return CustomSvgPicture(
-        svgImage: Theme.of(context).colorScheme.brightness == Brightness.light
-            ? AppAssets.loginLogoLight
-            : AppAssets.loginLogoDark,
-        height: context.screenHeight * 0.15);
+    final bool light =
+        Theme.of(context).colorScheme.brightness == Brightness.light;
+    return SizedBox(
+      height: context.screenHeight * 0.12,
+      child: Image.asset(
+        light ? AppAssets.loginLogoLight : AppAssets.loginLogoDark,
+        fit: BoxFit.contain,
+      ),
+    );
   }
 
   @override

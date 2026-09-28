@@ -23,13 +23,13 @@ class GetLanguageListError extends LanguageListState {
 class LanguageListCubit extends Cubit<LanguageListState> {
   LanguageListCubit() : super(LanguageListInitial());
 
-  /// Creates a fallback English language using local en.json file
+  /// Creates a fallback Dutch language using the local nl.json file
   AppLanguage _createFallbackEnglishLanguage() {
     return const AppLanguage(
-      id: 'en_fallback',
-      languageCode: 'en',
-      languageName: 'English',
-      imageURL: 'assets/images/english-au.svg',
+      id: 'nl_fallback',
+      languageCode: 'nl',
+      languageName: 'Dutch',
+      imageURL: '',
       isRtl: '0',
       isDefault: true,
     );
