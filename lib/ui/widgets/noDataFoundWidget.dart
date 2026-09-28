@@ -1,5 +1,5 @@
 import 'package:trvna/app/generalImports.dart';
-import 'package:trvna/ui/widgets/enumForWarningMessage.dart';
+import 'package:trvna/ui/widgets/enumForWarningMEssage.dart';
 import 'package:flutter/material.dart';
 
 class NoDataFoundWidget extends StatelessWidget {
