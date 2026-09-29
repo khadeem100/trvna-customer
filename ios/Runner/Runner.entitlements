@@ -3,16 +3,6 @@
 <plist version="1.0">
 <dict>
 	<key>aps-environment</key>
-	<string>production</string>
-	<key>com.apple.developer.applesignin</key>
-	<array>
-		<string>Default</string>
-	</array>
-	<key>com.apple.developer.associated-domains</key>
-	<array>
-		<string>applinks:trvna.com</string>
-	</array>
-	<key>com.apple.security.files.user-selected.read-only</key>
-	<true/>
+	<string>development</string>
 </dict>
 </plist>

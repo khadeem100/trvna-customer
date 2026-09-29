@@ -1,6 +1,9 @@
-import UIKit
-import Flutter
-import GoogleMaps
+  import Flutter
+  import Firebase
+  import FirebaseCore
+  import FirebaseFirestore
+  import UIKit
+  import GoogleMaps
 
 @main
 @objc class AppDelegate: FlutterAppDelegate {
@@ -8,40 +11,58 @@ import GoogleMaps
     _ application: UIApplication,
     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
   ) -> Bool {
-    GMSServices.provideAPIKey("AIzaSyBGX510jFcJhRZ87hYcyp84l9LuWaHnFok")
-    GeneratedPluginRegistrant.register(with: self)
-    return super.application(application, didFinishLaunchingWithOptions: launchOptions)
+      FirebaseApp.configure()
+             GMSServices.provideAPIKey("AIzaSyBGX510jFcJhRZ87hYcyp84l9LuWaHnFok")
+              GeneratedPluginRegistrant.register(with: self)
+              if #available(iOS 10.0, *) {
+                    // For iOS 10 display notification (sent via APNS)
+                    UNUserNotificationCenter.current().delegate = self
+
+                    let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
+                    UNUserNotificationCenter.current().requestAuthorization(
+                      options: authOptions,
+                      completionHandler: { _, _ in }
+                    )
+              } else {
+                let settings: UIUserNotificationSettings =
+                  UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
+                application.registerUserNotificationSettings(settings)
+              }
+         application.registerForRemoteNotifications()
+
+       return super.application(application, didFinishLaunchingWithOptions: launchOptions)
   }
+}
+func application(_ application: UIApplication,
+didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+  Messaging.messaging().apnsToken = deviceToken;
 }
 
 
-class AppLinks {
+func userNotificationCenter(_ center: UNUserNotificationCenter,
+                            willPresent notification: UNNotification,
+  withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+  let userInfo = notification.request.content.userInfo
 
-    var window: UIWindow?
+  Messaging.messaging().appDidReceiveMessage(userInfo)
 
-    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
-        return handleDeepLink(url: url)
-    }
+  // Change this to your preferred presentation option
+  completionHandler([[.alert, .sound]])
+}
 
-    func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
-        if userActivity.activityType == NSUserActivityTypeBrowsingWeb,
-           let url = userActivity.webpageURL {
-            return handleDeepLink(url: url)
-        }
-        return false
-    }
+func userNotificationCenter(_ center: UNUserNotificationCenter,
+                            didReceive response: UNNotificationResponse,
+                            withCompletionHandler completionHandler: @escaping () -> Void) {
+  let userInfo = response.notification.request.content.userInfo
 
-    private func handleDeepLink(url: URL) -> Bool {
-        guard let components = URLComponents(url: url, resolvingAgainstBaseURL: true) else {
-            return false
-        }
+  Messaging.messaging().appDidReceiveMessage(userInfo)
 
-        if let urlPattern = components.path.split(separator: "/").last {
-            print("URL pattern: \(urlPattern)")
-            return true
-        }
+  completionHandler()
+}
 
-        return false
-    }
-
+func application(_ application: UIApplication,
+didReceiveRemoteNotification userInfo: [AnyHashable : Any],
+   fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+  Messaging.messaging().appDidReceiveMessage(userInfo)
+  completionHandler(.noData)
 }
