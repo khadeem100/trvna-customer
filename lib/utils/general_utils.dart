@@ -453,5 +453,5 @@ RateMyApp rateMyApp = RateMyApp(
   minLaunches: 10,
   remindDays: 7,
   remindLaunches: 10,
-  googlePlayIdentifier: 'com.webiots.fixituserapi',
+  googlePlayIdentifier: 'com.trvna.customer',
 );
