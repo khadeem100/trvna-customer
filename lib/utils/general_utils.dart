@@ -136,16 +136,24 @@ Color fromHex(String hexString) {
 }
 
 getFcmToken() async {
-  String? token;
-  if (Platform.isAndroid) {
-    token = await FirebaseMessaging.instance.getToken();
+  try {
+    String? token;
+    if (Platform.isAndroid) {
+      token = await FirebaseMessaging.instance
+          .getToken()
+          .timeout(const Duration(seconds: 8));
+    }
+    if (Platform.isIOS) {
+      token = await FirebaseMessaging.instance
+          .getAPNSToken()
+          .timeout(const Duration(seconds: 8));
+      debugPrint("APNS Token: $token");
+    }
+    return token ?? "";
+  } catch (e) {
+    debugPrint("FCM token skipped: $e");
+    return "";
   }
-  if (Platform.isIOS) {
-    token = await FirebaseMessaging.instance.getAPNSToken();
-    debugPrint("APNS Token: $token");
-  }
-
-  return token;
 }
 
 getTime(time) {
